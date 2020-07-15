@@ -6,15 +6,16 @@ import Navbar from "./components/navbar.component";
 import CreateUser from "./components/create-user.component";
 
 function App() {
-	return (
-		<Router>
-			<div className="container">
-				<Navbar />
-				<br />
-				<Route path="/user" component={CreateUser} />
-			</div>
-		</Router>
-	);
+  return (
+    <Router>
+      <div className="container">
+        <Navbar />
+        <br />
+        <Route path="/user" component={CreateUser} />
+      </div>
+    </Router>
+  );
 }
 
 export default App;
+// just a change
