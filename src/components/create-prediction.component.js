@@ -31,9 +31,14 @@ const closest = function (el, selector, rootNode) {
   return el;
 };
 
-class Demo extends PureComponent {
+class CreatePrediction extends PureComponent {
   constructor(props) {
     super(props);
+
+    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeFastestLap = this.onChangeFastestLap.bind(this);
+    this.onChangePredictArray = this.onChangePredictArray.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onDragStart = this.onDragStart.bind(this);
@@ -41,14 +46,88 @@ class Demo extends PureComponent {
     this.onDragEnd = this.onDragEnd.bind(this);
 
     this.state = {
+      fastestLap: "",
+      users: [],
       data: [
         {
           title: "Hamilton",
           content: "Mercedes",
         },
         {
-          title: "Hamilton",
+          title: "Bottas",
           content: "Mercedes",
+        },
+        {
+          title: "Vettel",
+          content: "Ferrari",
+        },
+        {
+          title: "Leclerc",
+          content: "Ferrari",
+        },
+        {
+          title: "Verstappen",
+          content: "Red Bull",
+        },
+        {
+          title: "Albon",
+          content: "Red Bull",
+        },
+        {
+          title: "Sainz",
+          content: "McLaren",
+        },
+        {
+          title: "Norris",
+          content: "McLaren",
+        },
+        {
+          title: "Ricciardo",
+          content: "Renault",
+        },
+        {
+          title: "Ocon",
+          content: "Renault",
+        },
+        {
+          title: "Perez",
+          content: "Racing Point",
+        },
+        {
+          title: "Stroll",
+          content: "Racing Point",
+        },
+        {
+          title: "Gasly",
+          content: "AlphaTauri",
+        },
+        {
+          title: "Kvyat",
+          content: "AlphaTauri",
+        },
+        {
+          title: "Grosjean",
+          content: "Haas",
+        },
+        {
+          title: "Magnussen",
+          content: "Haas",
+        },
+        {
+          title: "Raikkonen",
+          content: "Alfa Romeo",
+        },
+        {
+          title: "Giovinazzi",
+          content: "Alfa Romeo",
+        },
+        {
+          title: "Russell",
+          content: "Williams",
+        },
+        {
+          title: "Latifi",
+          content: "Williams",
         },
       ],
       dragIndex: -1,
@@ -56,16 +135,8 @@ class Demo extends PureComponent {
     };
     this.columns = [
       {
-        title: "Driver",
-        dataIndex: "title",
-      },
-      {
-        title: "Team",
-        dataIndex: "content",
-      },
-      {
         title: "Change Postion",
-        render: (text, record, index) => (
+        render: (index) => (
           <span>
             {(this.state.dragIndex >= 0 &&
               this.state.dragIndex !== this.state.draggedIndex &&
@@ -85,10 +156,18 @@ class Demo extends PureComponent {
               onMouseDown={this.onMouseDown}
               href="#"
             >
-              Drag
+              ||
             </a>
           </span>
         ),
+      },
+      {
+        title: "Driver",
+        dataIndex: "title",
+      },
+      {
+        title: "Team",
+        dataIndex: "content",
       },
     ];
   }
@@ -145,7 +224,7 @@ class Demo extends PureComponent {
   }
 
   getTrNode(target) {
-    //     console.log('dragContainer:', this.refs.dragContainer)
+    console.log("dragContainer:", this.refs.dragContainer);
     //     return closest(target, 'tr', this.refs.dragContainer.tableNode);
     return closest(target, "tr");
   }
@@ -171,19 +250,135 @@ class Demo extends PureComponent {
     this.setState(result);
   }
 
+  onChangeUsername(e) {
+    this.setState({
+      username: e.target.value,
+    });
+    console.log(e.target.value);
+  }
+
+  onChangeFastestLap(e) {
+    this.setState({
+      fastestLap: e.target.value,
+    });
+  }
+
+  onChangePredictArray(e) {
+    this.setState({
+      data: e.target.value,
+    });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    const prediciton = {
+      username: this.state.username,
+      predictArray: this.state.predictArray,
+      fastestLap: this.state.fastestLap,
+    };
+
+    console.log(prediciton);
+
+    axios
+      .post("http://localhost:5000/predictions/add", prediciton)
+      .then((res) => console.log(res.data));
+
+    window.location = "/";
+  }
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:5000/users/")
+      .then((response) => {
+        if (response.data.length > 0) {
+          this.setState({
+            users: response.data.map((user) => user.username),
+            username: response.data[0].username,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   render() {
     return (
       <div style={{ margin: 1, textAlign: "center" }}>
         <h2>Make Prediction</h2>
-        <Table
-          className={(this.state.dragIndex >= 0 && "dragging-container") || ""}
-          //           ref="dragContainer"
-          columns={this.columns}
-          pagination={false}
-          dataSource={this.state.data}
-        />
+        <form onSubmit={this.onSubmit}>
+          <div className="form-group">
+            <label>Select User:</label>
+            <select
+              ref="userInput"
+              required
+              className="form-control"
+              value={this.state.username}
+              onChange={this.onChangeUsername}
+            >
+              {this.state.users.map(function (user) {
+                return (
+                  <option key={user} value={user}>
+                    {user}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div className="form-group">
+            <Table
+              className={
+                (this.state.dragIndex >= 0 && "dragging-container") || ""
+              }
+              //           ref="dragContainer"
+              columns={this.columns}
+              pagination={false}
+              dataSource={this.state.data}
+              onChange={this.onChangePredictArray}
+            />
+          </div>
+          <div className="form-group">
+            <label>Fastest Lap:</label>
+            <select
+              ref="userInput"
+              required
+              className="form-control"
+              value={this.state.fastestLap}
+              onChange={this.onChangeFastestLap}
+            >
+              <option value="Hamilton"> Hamilton </option>
+              <option value="Bottas"> Bottas </option>
+              <option value="Vettel"> Vettel </option>
+              <option value="Leclerc"> Leclerc </option>
+              <option value="Verstappen"> Verstappen </option>
+              <option value="Albon"> Albon </option>
+              <option value="Sainz"> Sainz </option>
+              <option value="Norris"> Norris </option>
+              <option value="Ricciardo"> Ricciardo </option>
+              <option value="Ocon"> Ocon </option>
+              <option value="Perez"> Perez </option>
+              <option value="Stroll"> Stroll </option>
+              <option value="Gasly"> Gasly </option>
+              <option value="Kvyat"> Kvyat </option>
+              <option value="Grosjean"> Grosjean </option>
+              <option value="Magnussen"> Magnussen </option>
+              <option value="Raikkonen"> Raikkonen </option>
+              <option value="Giovinazzi"> Giovinazzi </option>
+              <option value="Russell"> Russell </option>
+              <option value="Latifi"> Latifi </option>
+            </select>
+          </div>
+          <div className="form-group">
+            <input
+              type="Submit"
+              value="Submit Prediction"
+              className="btn btn-primary"
+            />
+          </div>
+        </form>
       </div>
     );
   }
 }
-export default Demo;
+export default CreatePrediction;

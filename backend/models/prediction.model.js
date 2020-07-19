@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const predictionSchema = new Schema(
   {
     username: { type: String, required: true },
-    predictArray: { type: [String], required: true, maxlength: 3 },
+    predictArray: { type: [String], required: true },
     fastestLap: { type: String, required: true },
   },
   {
