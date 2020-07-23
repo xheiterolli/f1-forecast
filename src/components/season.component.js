@@ -18,8 +18,8 @@ fetch("http://ergast.com/api/f1/2020/races")
 export default function Season() {
   return (
     <div>
-      <h3 style={{ margin: 1, textAlign: "center" }}>Season 2020</h3>
-      <ul style={{ margin: 1, textAlign: "center" }}>
+      <h3>Season 2020</h3>
+      <ul>
         {racesArray.map((item) => {
           return <li>{item}</li>;
         })}

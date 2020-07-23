@@ -9,12 +9,12 @@ router.route("/").get((req, res) => {
 
 router.route("/add").post((req, res) => {
   const username = req.body.username;
-  const predictArray = req.body.predictArray;
+  const items = req.body.items;
   const fastestLap = req.body.fastestLap;
 
   const newPrediction = new Prediction({
     username,
-    predictArray,
+    items,
     fastestLap,
   });
 

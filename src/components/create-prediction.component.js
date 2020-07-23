@@ -2,49 +2,18 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
-import {
-  AwesomeButton,
-  AwesomeButtonProgress,
-  AwesomeButtonSocial,
-} from "react-awesome-button";
-import AwesomeButtonStyles from "react-awesome-button/src/styles/styles.scss";
-
-const driversArray = [];
-
-fetch("http://ergast.com/api/f1/2020/drivers")
-  .then(function (resp) {
-    return resp.text();
-  })
-  .then(function (data) {
-    let parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(data, "text/xml");
-    for (let i = 0; i < 20; i++) {
-      driversArray.push({
-        id: `item-${i}`,
-        content: xmlDoc.getElementsByTagName("FamilyName")[i].textContent,
-      });
-    }
-  });
-
-// fake data generator
-/*
-const getItems = (count) =>
-  Array.from({ length: count }, (v, k) => k).map((k) => ({
-    id: `item-${k}`,
-    content: `item ${k}`,
-  }));
-*/
+import { AwesomeButton } from "react-awesome-button";
+import "react-awesome-button/dist/styles.css";
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
-
   return result;
 };
 
-const grid = 8;
+const grid = 5;
 
 const getItemStyle = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
@@ -60,7 +29,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 });
 
 const getListStyle = (isDraggingOver) => ({
-  background: isDraggingOver ? "grey" : "grey",
+  background: isDraggingOver ? "lightgrey" : "lightgrey",
   padding: grid,
   width: 250,
 });
@@ -70,44 +39,15 @@ export default class CreatePrediction extends Component {
     super(props);
 
     this.state = {
-      items: driversArray,
+      items: [],
       users: [],
+      fastestLap: {},
     };
 
     this.onDragEnd = this.onDragEnd.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeFastestLap = this.onChangeFastestLap.bind(this);
-  }
-
-  onDragEnd(result) {
-    // dropped outside the list
-    if (!result.destination) {
-      return;
-    }
-
-    const items = reorder(
-      this.state.items,
-      result.source.index,
-      result.destination.index
-    );
-
-    this.setState({
-      items,
-    });
-    console.log(items);
-  }
-
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value,
-    });
-    console.log(e.target.value);
-  }
-
-  onChangeFastestLap(e) {
-    this.setState({
-      fastestLap: e.target.value,
-    });
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -124,10 +64,91 @@ export default class CreatePrediction extends Component {
       .catch((error) => {
         console.log(error);
       });
+
+    const driversArray = [];
+
+    fetch("http://ergast.com/api/f1/2020/drivers")
+      .then(function (resp) {
+        return resp.text();
+      })
+      .then(function (data) {
+        let parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(data, "text/xml");
+        for (let i = 0; i < 20; i++) {
+          driversArray.push({
+            id: `item-${i}`,
+            content: xmlDoc.getElementsByTagName("FamilyName")[i].textContent,
+          });
+        }
+      });
+
+    console.log("Component did mount -> driversArray");
+    console.log(driversArray);
+
+    this.setState((state) => {
+      return { items: driversArray };
+    });
+
+    console.log("this.items");
+    console.log(this.items);
   }
 
-  // Normally you would want to split things out into separate components.
-  // But in this example everything is just done in one place for simplicity
+  onDragEnd(result) {
+    // dropped outside the list
+    if (!result.destination) return;
+
+    const items = reorder(
+      this.state.items,
+      result.source.index,
+      result.destination.index
+    );
+
+    this.setState({
+      items,
+    });
+
+    console.log(items);
+  }
+
+  onChangeUsername(e) {
+    this.setState({
+      username: e.target.value,
+    });
+    console.log(e.target.value);
+  }
+
+  onChangeFastestLap(e) {
+    this.setState({
+      fastestLap: e.target.value,
+    });
+    console.log(e.target.value);
+  }
+
+  onSubmit(e) {
+    //e.preventDefault();
+
+    const prediction = {
+      items: this.state.items,
+      username: this.state.username,
+      fastestLap: this.state.fastestLap,
+    };
+
+    console.log("on drag end -> this.items");
+    console.log(this.items);
+
+    axios
+      .post("http://localhost:5000/predictions/add", prediction)
+      .then((res) => {
+        console.log(res.data);
+        console.log("Prediction Submitted");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    //window.location = "/";
+  }
+
   render() {
     return (
       <div style={{ margin: 1, alignItems: "center" }}>
@@ -186,13 +207,32 @@ export default class CreatePrediction extends Component {
             </Droppable>
           </DragDropContext>
         </div>
+        <div className="form-group">
+          <label>Select Fastest Lap</label>
+          <select
+            ref="userInput"
+            required
+            className="form-control"
+            value={this.state.fastestLap}
+            onChange={this.onChangeFastestLap}
+          >
+            {this.state.items.map(function (item) {
+              return (
+                <option key={item.id} value={item.content}>
+                  {item.content}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <br></br>
         <div>
           <AwesomeButton
-            cssModule={AwesomeButtonStyles}
             type="primary"
             ripple
             onPress={() => {
-              // do something
+              console.log("Button Click");
+              this.onSubmit();
             }}
           >
             Submit
