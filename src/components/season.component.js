@@ -1,23 +1,29 @@
 import React, { Component } from "react";
-//import axios from "axios";
 
-class SeasonComponent extends Component {
-  constructor(props) {
-    super(props);
+const racesArray = [];
 
-    this.state = { races: ["Race1", "Race2"] };
-  }
+fetch("http://ergast.com/api/f1/2020/races")
+  .then(function (resp) {
+    return resp.text();
+  })
+  .then(function (data) {
+    let parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(data, "text/xml");
+    for (let i = 0; i < 8; i++) {
+      racesArray.push(xmlDoc.getElementsByTagName("RaceName")[i].textContent);
+    }
+    console.log(racesArray);
+  });
 
-  render() {
-    return (
-      <div>
-        <h3>Season 2020</h3>
-        <table className="SeasonTable">
-          <tbody>{this.raceList()}</tbody>
-        </table>
-      </div>
-    );
-  }
+export default function Season() {
+  return (
+    <div>
+      <h3 style={{ margin: 1, textAlign: "center" }}>Season 2020</h3>
+      <ul style={{ margin: 1, textAlign: "center" }}>
+        {racesArray.map((item) => {
+          return <li>{item}</li>;
+        })}
+      </ul>
+    </div>
+  );
 }
-
-export default SeasonComponent;
