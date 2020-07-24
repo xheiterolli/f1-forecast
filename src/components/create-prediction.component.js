@@ -4,6 +4,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
 import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
+import racesArray from "./season.component";
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -40,17 +41,20 @@ export default class CreatePrediction extends Component {
 
     this.state = {
       items: [],
+      races: [],
       users: [],
       fastestLap: {},
     };
 
     this.onDragEnd = this.onDragEnd.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeRace = this.onChangeRace.bind(this);
     this.onChangeFastestLap = this.onChangeFastestLap.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
+    // getting users ---------------------------------------------------
     axios
       .get("http://localhost:5000/users/")
       .then((response) => {
@@ -65,8 +69,8 @@ export default class CreatePrediction extends Component {
         console.log(error);
       });
 
+    //getting drivers --------------------------------------------------
     const driversArray = [];
-
     fetch("http://ergast.com/api/f1/2020/drivers")
       .then(function (resp) {
         return resp.text();
@@ -82,15 +86,30 @@ export default class CreatePrediction extends Component {
         }
       });
 
-    console.log("Component did mount -> driversArray");
-    console.log(driversArray);
-
     this.setState((state) => {
       return { items: driversArray };
     });
 
-    console.log("this.items");
-    console.log(this.items);
+    // getting races -----------------------------------------------------
+    const racesArray = [];
+    fetch("http://ergast.com/api/f1/2020/races")
+      .then(function (resp) {
+        return resp.text();
+      })
+      .then(function (data) {
+        let parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(data, "text/xml");
+        for (let i = 0; i < 8; i++) {
+          racesArray.push(
+            xmlDoc.getElementsByTagName("RaceName")[i].textContent
+          );
+        }
+        console.log(racesArray);
+      });
+
+    this.setState((state) => {
+      return { races: racesArray };
+    });
   }
 
   onDragEnd(result) {
@@ -117,6 +136,13 @@ export default class CreatePrediction extends Component {
     console.log(e.target.value);
   }
 
+  onChangeRace(e) {
+    this.setState({
+      race: e.target.value,
+    });
+    console.log(e.target.value);
+  }
+
   onChangeFastestLap(e) {
     this.setState({
       fastestLap: e.target.value,
@@ -128,13 +154,11 @@ export default class CreatePrediction extends Component {
     //e.preventDefault();
 
     const prediction = {
-      items: this.state.items,
       username: this.state.username,
+      race: this.state.race,
+      items: this.state.items,
       fastestLap: this.state.fastestLap,
     };
-
-    console.log("on drag end -> this.items");
-    console.log(this.items);
 
     axios
       .post("http://localhost:5000/predictions/add", prediction)
@@ -166,6 +190,24 @@ export default class CreatePrediction extends Component {
               return (
                 <option key={user} value={user}>
                   {user}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className="form-group">
+          <label>Select Race:</label>
+          <select
+            ref="userInput"
+            required
+            className="form-control"
+            value={this.state.race}
+            onChange={this.onChangeRace}
+          >
+            {this.state.races.map(function (item) {
+              return (
+                <option key={item} value={item}>
+                  {item}
                 </option>
               );
             })}
