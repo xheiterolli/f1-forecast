@@ -1,10 +1,35 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
 import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
-import racesArray from "./season.component";
+import styles from "../index.css";
+//import { Paper } from "@material-ui/core";
+//import { Grid } from "@material-ui/core";
+//import { classes } from "*.module.css";
+
+const indexArray = [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+];
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -14,7 +39,7 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
-const grid = 5;
+const grid = 4;
 
 const getItemStyle = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
@@ -23,16 +48,18 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   margin: `0 0 ${grid}px 0`,
 
   // change background colour if dragging
-  background: isDragging ? "lightgrey" : "white",
+  background: isDragging ? "turquoise" : "#1E88E5",
+  color: isDragging ? "#000000" : "white",
 
   // styles we need to apply on draggables
   ...draggableStyle,
 });
 
 const getListStyle = (isDraggingOver) => ({
-  background: isDraggingOver ? "lightgrey" : "lightgrey",
+  background: isDraggingOver ? "white" : "white",
   padding: grid,
-  width: 250,
+  width: "100%",
+  float: "right",
 });
 
 export default class CreatePrediction extends Component {
@@ -144,10 +171,11 @@ export default class CreatePrediction extends Component {
   }
 
   onChangeFastestLap(e) {
-    this.setState({
-      fastestLap: e.target.value,
-    });
-    console.log(e.target.value);
+    //this.setState({
+    //  fastestLap: e.target.value,
+    //});
+    const id = e.target.id;
+    console.log(id);
   }
 
   onSubmit(e) {
@@ -175,11 +203,19 @@ export default class CreatePrediction extends Component {
 
   render() {
     return (
-      <div style={{ margin: 1, alignItems: "center" }}>
+      <div style={{ textAlign: "center" }} className="selectpicker">
         <h2>Make Prediction</h2>
         <div className="form-group">
           <label>Select User:</label>
           <select
+            style={{
+              textAlignLast: "center",
+              textAlign: "center",
+              msTextAlignLast: "center",
+              mozTextAlignLast: "center",
+            }}
+            //className="selectpicker"
+            //data-live-search="true"
             ref="userInput"
             required
             className="form-control"
@@ -198,6 +234,12 @@ export default class CreatePrediction extends Component {
         <div className="form-group">
           <label>Select Race:</label>
           <select
+            style={{
+              textAlignLast: "center",
+              textAlign: "center",
+              msTextAlignLast: "center",
+              mozTextAlignLast: "center",
+            }}
             ref="userInput"
             required
             className="form-control"
@@ -213,45 +255,78 @@ export default class CreatePrediction extends Component {
             })}
           </select>
         </div>
-        <div>
-          <DragDropContext onDragEnd={this.onDragEnd}>
-            <Droppable droppableId="droppable">
-              {(provided, snapshot) => (
-                <div
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                  style={getListStyle(snapshot.isDraggingOver)}
-                >
-                  {this.state.items.map((item, index) => (
-                    <Draggable
-                      key={item.id}
-                      draggableId={item.id}
-                      index={index}
+        <div id="full">
+          <div id="left">
+            <div style={{ width: "calc(10% - 2px)", float: "right" }}>
+              {indexArray.map(function (item) {
+                return (
+                  <AwesomeButton
+                    style={{
+                      width: "100%",
+                      display: "block",
+                      padding: "3px",
+                    }}
+                    type="primary"
+                    ripple
+                    onPress={() => {
+                      //this.onChangeFastestLap();
+                      console.log(); //---------------------------------------------------------
+                    }}
+                  >
+                    {item}
+                  </AwesomeButton>
+                );
+              })}
+            </div>
+          </div>
+          <div id="right">
+            <div style={{ width: "calc(25% - 2px)", float: "left" }}>
+              <DragDropContext onDragEnd={this.onDragEnd}>
+                <Droppable droppableId="droppable">
+                  {(provided, snapshot) => (
+                    <div
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                      style={getListStyle(snapshot.isDraggingOver)}
                     >
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={getItemStyle(
-                            snapshot.isDragging,
-                            provided.draggableProps.style
-                          )}
+                      {this.state.items.map((item, index) => (
+                        <Draggable
+                          key={item.id}
+                          draggableId={item.id}
+                          index={index}
                         >
-                          {item.content}
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
+                          {(provided, snapshot) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              style={getItemStyle(
+                                snapshot.isDragging,
+                                provided.draggableProps.style
+                              )}
+                            >
+                              {item.content}
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
+            </div>
+          </div>
         </div>
         <div className="form-group">
-          <label>Select Fastest Lap</label>
+          <label>Select Fastest Lap:</label>
           <select
+            style={{
+              textAlignLast: "center",
+              textAlign: "center",
+              msTextAlignLast: "center",
+              mozTextAlignLast: "center",
+            }}
             ref="userInput"
             required
             className="form-control"
@@ -267,7 +342,6 @@ export default class CreatePrediction extends Component {
             })}
           </select>
         </div>
-        <br></br>
         <div>
           <AwesomeButton
             type="primary"

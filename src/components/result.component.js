@@ -1,30 +1,29 @@
 import React, { Component } from "react";
+import axios from "axios";
 
-const driversArray = [];
+const resultsArray = [];
 
-fetch("http://ergast.com/api/f1/2020/drivers")
+fetch("http://ergast.com/api/f1/2020/results")
   .then(function (resp) {
     return resp.text();
   })
   .then(function (data) {
     let parser = new DOMParser();
     const xmlDoc = parser.parseFromString(data, "text/xml");
-    for (let i = 0; i < 20; i++) {
-      driversArray.push(
+    for (let i = 0; i < 30; i++) {
+      resultsArray.push(
         xmlDoc.getElementsByTagName("FamilyName")[i].textContent
       );
     }
+    console.log(resultsArray);
   });
 
-export default function Driver() {
+export default function Season() {
   return (
     <div>
-      <h3 style={{ margin: 1, textAlign: "center" }}>
-        {" "}
-        2020 Formula 1 Drivers{" "}
-      </h3>
-      <ul style={{ margin: 1, textAlign: "center" }}>
-        {driversArray.map((item) => {
+      <h2 style={{ textAlign: "center" }}>Results</h2>
+      <ul>
+        {resultsArray.map((item) => {
           return <li>{item}</li>;
         })}
       </ul>
