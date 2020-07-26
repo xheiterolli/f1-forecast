@@ -4,6 +4,7 @@ import axios from "axios";
 import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
 import styles from "../index.css";
+//import AwesomeButtonStyles from "react-awesome-button/src/styles/styles.scss";
 //import { Paper } from "@material-ui/core";
 //import { Grid } from "@material-ui/core";
 //import { classes } from "*.module.css";
@@ -71,6 +72,7 @@ export default class CreatePrediction extends Component {
       races: [],
       users: [],
       fastestLap: {},
+      indexFast: "1",
     };
 
     this.onDragEnd = this.onDragEnd.bind(this);
@@ -153,6 +155,11 @@ export default class CreatePrediction extends Component {
       items,
     });
 
+    const fastest = this.state.items[this.indexFast - 1];
+    this.setState({
+      fastestLap: fastest,
+    });
+
     console.log(items);
   }
 
@@ -171,11 +178,13 @@ export default class CreatePrediction extends Component {
   }
 
   onChangeFastestLap(e) {
-    //this.setState({
-    //  fastestLap: e.target.value,
-    //});
     const id = e.target.id;
-    console.log(id);
+    const fastest = this.state.items[id - 1];
+    this.setState({
+      indexFast: id,
+      fastestLap: fastest,
+    });
+    console.log(this.state.fastestLap);
   }
 
   onSubmit(e) {
@@ -203,8 +212,7 @@ export default class CreatePrediction extends Component {
 
   render() {
     return (
-      <div style={{ textAlign: "center" }} className="selectpicker">
-        <h2>Make Prediction</h2>
+      <div className="selectpicker">
         <div className="form-group">
           <label>Select User:</label>
           <select
@@ -258,28 +266,309 @@ export default class CreatePrediction extends Component {
         <div id="full">
           <div id="left">
             <div style={{ width: "calc(10% - 2px)", float: "right" }}>
-              {indexArray.map(function (item) {
-                return (
-                  <AwesomeButton
-                    style={{
-                      width: "100%",
-                      display: "block",
-                      padding: "3px",
-                    }}
-                    type="primary"
-                    ripple
-                    onPress={() => {
-                      //this.onChangeFastestLap();
-                      console.log(); //---------------------------------------------------------
-                    }}
-                  >
-                    {item}
-                  </AwesomeButton>
-                );
-              })}
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="1"
+                onClick={this.onChangeFastestLap}
+              >
+                1
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="2"
+                onClick={this.onChangeFastestLap}
+              >
+                2
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="3"
+                onClick={this.onChangeFastestLap}
+              >
+                3
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="4"
+                onClick={this.onChangeFastestLap}
+              >
+                4
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="5"
+                onClick={this.onChangeFastestLap}
+              >
+                5
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="6"
+                onClick={this.onChangeFastestLap}
+              >
+                6
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="7"
+                onClick={this.onChangeFastestLap}
+              >
+                7
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="8"
+                onClick={this.onChangeFastestLap}
+              >
+                8
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="9"
+                onClick={this.onChangeFastestLap}
+              >
+                9
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="10"
+                onClick={this.onChangeFastestLap}
+              >
+                10
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="11"
+                onClick={this.onChangeFastestLap}
+              >
+                11
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="12"
+                onClick={this.onChangeFastestLap}
+              >
+                12
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="13"
+                onClick={this.onChangeFastestLap}
+              >
+                13
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="14"
+                onClick={this.onChangeFastestLap}
+              >
+                14
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="15"
+                onClick={this.onChangeFastestLap}
+              >
+                15
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="16"
+                onClick={this.onChangeFastestLap}
+              >
+                16
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="17"
+                onClick={this.onChangeFastestLap}
+              >
+                17
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="18"
+                onClick={this.onChangeFastestLap}
+              >
+                18
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="19"
+                onClick={this.onChangeFastestLap}
+              >
+                19
+              </button>
+              <button
+                style={{
+                  height: "44px",
+                  width: "44px",
+                  display: "block",
+                  padding: "3px",
+                  backgroundColor: "#1E88E5",
+                  borderColor: "white",
+                  color: "white",
+                }}
+                id="20"
+                onClick={this.onChangeFastestLap}
+              >
+                20
+              </button>
             </div>
           </div>
-          <div id="right">
+          <div style={{ textAlign: "center" }} id="right">
             <div style={{ width: "calc(25% - 2px)", float: "left" }}>
               <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId="droppable">
@@ -318,7 +607,47 @@ export default class CreatePrediction extends Component {
             </div>
           </div>
         </div>
-        <div className="form-group">
+        <div>
+          <AwesomeButton
+            style={{ width: "250px", height: "50px", textAlign: "center" }}
+            type="primary"
+            ripple
+            onPress={() => {
+              console.log("Button Click");
+              this.onSubmit();
+            }}
+          >
+            Submit
+          </AwesomeButton>
+        </div>
+      </div>
+    );
+  }
+}
+
+/*
+
+           {indexArray.map(function (item) {
+                return (
+                  <button
+                    style={{
+                      height: "44px",
+                      width: "44px",
+                      display: "block",
+                      padding: "3px",
+                    }}
+                    id={item.toString}
+                    onClick={() => this.onChangeFastestLap()}
+                  >
+                    {item}
+                  </button>
+                );
+              })}
+
+*/
+
+/*
+<div className="form-group">
           <label>Select Fastest Lap:</label>
           <select
             style={{
@@ -342,19 +671,7 @@ export default class CreatePrediction extends Component {
             })}
           </select>
         </div>
-        <div>
-          <AwesomeButton
-            type="primary"
-            ripple
-            onPress={() => {
-              console.log("Button Click");
-              this.onSubmit();
-            }}
-          >
-            Submit
-          </AwesomeButton>
-        </div>
-      </div>
-    );
-  }
-}
+
+
+        style={{ textAlign: "center" }}
+*/
