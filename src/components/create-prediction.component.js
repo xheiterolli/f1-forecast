@@ -200,6 +200,7 @@ export default class CreatePrediction extends Component {
     axios
       .post("http://localhost:5000/predictions/add", prediction)
       .then((res) => {
+        window.location = "/submission";
         console.log(res.data);
         console.log("Prediction Submitted");
       })
@@ -212,7 +213,10 @@ export default class CreatePrediction extends Component {
 
   render() {
     return (
-      <div className="selectpicker">
+      <div>
+        <br></br>
+        <br></br>
+        <br></br>
         <div className="form-group">
           <label>Select User:</label>
           <select
@@ -626,7 +630,6 @@ export default class CreatePrediction extends Component {
 }
 
 /*
-
            {indexArray.map(function (item) {
                 return (
                   <button
@@ -643,7 +646,6 @@ export default class CreatePrediction extends Component {
                   </button>
                 );
               })}
-
 */
 
 /*
@@ -671,7 +673,5 @@ export default class CreatePrediction extends Component {
             })}
           </select>
         </div>
-
-
         style={{ textAlign: "center" }}
 */
