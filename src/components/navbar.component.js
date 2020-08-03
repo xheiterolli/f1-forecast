@@ -15,7 +15,7 @@ export default class Navbar extends Component {
           alignItems: "center",
         }}
       >
-        <Link to="/result" className="navbar navbar-brand bg-dark">
+        <Link to="/" className="navbar navbar-brand bg-dark">
           Formula 1 Forecast
         </Link>
         <div className="navbar-collapse">

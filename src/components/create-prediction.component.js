@@ -40,7 +40,7 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
-const grid = 4;
+const grid = 3;
 
 const getItemStyle = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
@@ -217,7 +217,7 @@ export default class CreatePrediction extends Component {
         <br></br>
         <br></br>
         <br></br>
-        <div className="form-group">
+        <div className="form-group" id="left">
           <label>Select User:</label>
           <select
             style={{
@@ -243,7 +243,7 @@ export default class CreatePrediction extends Component {
             })}
           </select>
         </div>
-        <div className="form-group">
+        <div className="form-group" id="right">
           <label>Select Race:</label>
           <select
             style={{
@@ -251,6 +251,7 @@ export default class CreatePrediction extends Component {
               textAlign: "center",
               msTextAlignLast: "center",
               mozTextAlignLast: "center",
+              marginBottom: "none",
             }}
             ref="userInput"
             required
@@ -269,10 +270,10 @@ export default class CreatePrediction extends Component {
         </div>
         <div id="full">
           <div id="left">
-            <div style={{ width: "calc(10% - 2px)", float: "right" }}>
+            <div style={{ width: "calc(10% - 12px)", float: "right" }}>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -287,7 +288,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -302,7 +303,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -317,7 +318,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -332,7 +333,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -347,7 +348,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -362,7 +363,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -377,7 +378,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -392,7 +393,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -407,7 +408,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -422,7 +423,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -437,7 +438,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -452,7 +453,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -467,7 +468,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -482,7 +483,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -497,7 +498,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -512,7 +513,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -527,7 +528,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -542,7 +543,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -557,7 +558,7 @@ export default class CreatePrediction extends Component {
               </button>
               <button
                 style={{
-                  height: "44px",
+                  height: "39px",
                   width: "44px",
                   display: "block",
                   padding: "3px",
@@ -572,8 +573,8 @@ export default class CreatePrediction extends Component {
               </button>
             </div>
           </div>
-          <div style={{ textAlign: "center" }} id="right">
-            <div style={{ width: "calc(25% - 2px)", float: "left" }}>
+          <div id="right">
+            <div style={{ width: "25%", float: "left" }}>
               <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId="droppable">
                   {(provided, snapshot) => (
@@ -611,9 +612,21 @@ export default class CreatePrediction extends Component {
             </div>
           </div>
         </div>
-        <div>
+        <div
+          id="center"
+          style={{
+            position: "absolute",
+            bottom: 0 + "1px",
+            right: 0,
+            width: "42%",
+            height: "46%",
+          }}
+        >
           <AwesomeButton
-            style={{ width: "250px", height: "50px", textAlign: "center" }}
+            style={{
+              width: "150px",
+              height: "35px",
+            }}
             type="primary"
             ripple
             onPress={() => {
