@@ -24,9 +24,6 @@ fetch("http://ergast.com/api/f1/2020/results")
 export default function Season() {
   return (
     <div>
-      <br></br>
-      <br></br>
-      <br></br>
       <h2 style={{ textAlign: "center" }}>Results</h2>
       <ul>
         {resultsArray.map((item) => {

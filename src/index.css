@@ -38,6 +38,16 @@ body {
   width: "70%";
 }
 
+.positionButton {
+  height: "39px";
+  width: "44px";
+  display: "block";
+  padding: "3px";
+  background-color: "#1E88E5";
+  border-color: "white";
+  color: "white";
+}
+
 .center-navbar {
   width: 50%;
   margin-left: 45%;

@@ -214,62 +214,79 @@ export default class CreatePrediction extends Component {
   render() {
     return (
       <div>
-        <br></br>
-        <br></br>
-        <br></br>
-        <div className="form-group" id="left">
-          <label>Select User:</label>
-          <select
+        <div class="container" id="left">
+          <div>
+            <label>Select User:</label>
+            <select
+              style={{
+                textAlignLast: "center",
+                textAlign: "center",
+                msTextAlignLast: "center",
+                mozTextAlignLast: "center",
+              }}
+              //className="selectpicker"
+              //data-live-search="true"
+              ref="userInput"
+              required
+              className="form-control"
+              value={this.state.username}
+              onChange={this.onChangeUsername}
+            >
+              {this.state.users.map(function (user) {
+                return (
+                  <option key={user} value={user}>
+                    {user}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div>
+            <label>Select Race:</label>
+            <select
+              style={{
+                textAlignLast: "center",
+                textAlign: "center",
+                msTextAlignLast: "center",
+                mozTextAlignLast: "center",
+                marginBottom: "none",
+              }}
+              ref="userInput"
+              required
+              className="form-control"
+              value={this.state.race}
+              onChange={this.onChangeRace}
+            >
+              {this.state.races.map(function (item) {
+                return (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <AwesomeButton
             style={{
-              textAlignLast: "center",
-              textAlign: "center",
-              msTextAlignLast: "center",
-              mozTextAlignLast: "center",
+              width: "140px",
+              height: "40px",
+              margin: "1% 41% 0",
+              display: "block",
+              justifyContent: "center",
+              alignItems: "center",
             }}
-            //className="selectpicker"
-            //data-live-search="true"
-            ref="userInput"
-            required
-            className="form-control"
-            value={this.state.username}
-            onChange={this.onChangeUsername}
-          >
-            {this.state.users.map(function (user) {
-              return (
-                <option key={user} value={user}>
-                  {user}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-        <div className="form-group" id="right">
-          <label>Select Race:</label>
-          <select
-            style={{
-              textAlignLast: "center",
-              textAlign: "center",
-              msTextAlignLast: "center",
-              mozTextAlignLast: "center",
-              marginBottom: "none",
+            type="primary"
+            ripple
+            onPress={() => {
+              console.log("Button Click");
+              this.onSubmit();
             }}
-            ref="userInput"
-            required
-            className="form-control"
-            value={this.state.race}
-            onChange={this.onChangeRace}
           >
-            {this.state.races.map(function (item) {
-              return (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              );
-            })}
-          </select>
+            Submit
+          </AwesomeButton>
         </div>
-        <div id="full">
-          <div id="left">
+        <div id="right">
+          <div id="left" style={{ width: "calc(50% - 12px)" }}>
             <div style={{ width: "calc(10% - 12px)", float: "right" }}>
               <button
                 style={{
@@ -573,118 +590,48 @@ export default class CreatePrediction extends Component {
               </button>
             </div>
           </div>
-          <div id="right">
-            <div style={{ width: "25%", float: "left" }}>
-              <DragDropContext onDragEnd={this.onDragEnd}>
-                <Droppable droppableId="droppable">
-                  {(provided, snapshot) => (
-                    <div
-                      {...provided.droppableProps}
-                      ref={provided.innerRef}
-                      style={getListStyle(snapshot.isDraggingOver)}
-                    >
-                      {this.state.items.map((item, index) => (
-                        <Draggable
-                          key={item.id}
-                          draggableId={item.id}
-                          index={index}
-                        >
-                          {(provided, snapshot) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                              style={getItemStyle(
-                                snapshot.isDragging,
-                                provided.draggableProps.style
-                              )}
-                            >
-                              {item.content}
-                            </div>
-                          )}
-                        </Draggable>
-                      ))}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              </DragDropContext>
+          <div id="right" style={{ width: "calc(50% - 12px)" }}>
+            <div>
+              <div style={{ width: "50%", float: "left" }}>
+                <DragDropContext onDragEnd={this.onDragEnd}>
+                  <Droppable droppableId="droppable">
+                    {(provided, snapshot) => (
+                      <div
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
+                        style={getListStyle(snapshot.isDraggingOver)}
+                      >
+                        {this.state.items.map((item, index) => (
+                          <Draggable
+                            key={item.id}
+                            draggableId={item.id}
+                            index={index}
+                          >
+                            {(provided, snapshot) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={getItemStyle(
+                                  snapshot.isDragging,
+                                  provided.draggableProps.style
+                                )}
+                              >
+                                {item.content}
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
+                </DragDropContext>
+              </div>
             </div>
           </div>
-        </div>
-        <div
-          id="center"
-          style={{
-            position: "absolute",
-            bottom: 0 + "1px",
-            right: 0,
-            width: "42%",
-            height: "46%",
-          }}
-        >
-          <AwesomeButton
-            style={{
-              width: "150px",
-              height: "35px",
-            }}
-            type="primary"
-            ripple
-            onPress={() => {
-              console.log("Button Click");
-              this.onSubmit();
-            }}
-          >
-            Submit
-          </AwesomeButton>
         </div>
       </div>
     );
   }
 }
-
-/*
-           {indexArray.map(function (item) {
-                return (
-                  <button
-                    style={{
-                      height: "44px",
-                      width: "44px",
-                      display: "block",
-                      padding: "3px",
-                    }}
-                    id={item.toString}
-                    onClick={() => this.onChangeFastestLap()}
-                  >
-                    {item}
-                  </button>
-                );
-              })}
-*/
-
-/*
-<div className="form-group">
-          <label>Select Fastest Lap:</label>
-          <select
-            style={{
-              textAlignLast: "center",
-              textAlign: "center",
-              msTextAlignLast: "center",
-              mozTextAlignLast: "center",
-            }}
-            ref="userInput"
-            required
-            className="form-control"
-            value={this.state.fastestLap}
-            onChange={this.onChangeFastestLap}
-          >
-            {this.state.items.map(function (item) {
-              return (
-                <option key={item.id} value={item.content}>
-                  {item.content}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-        style={{ textAlign: "center" }}
-*/

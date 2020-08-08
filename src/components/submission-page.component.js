@@ -5,17 +5,17 @@ export default function Submission() {
   return (
     <div>
       <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <img
-        style={{ paddingLeft: "27%", paddingRight: "40%" }}
-        src={Toto}
-        alt="Toto"
-      />
-      <br></br>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <img src={Toto} alt="Toto" />
+      </div>
       <h2 style={{ color: "green", textAlign: "center" }}>
-        Submission Successful ✔
+        Submission Successful ✓
       </h2>
     </div>
   );
