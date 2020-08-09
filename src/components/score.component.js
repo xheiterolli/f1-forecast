@@ -3,15 +3,14 @@ import PropTypes from "prop-types";
 import UserScore from "./user-score.component";
 import axios from "axios";
 
-let raceNumber;
+let race_number;
 
 export default class Score extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      races: this.props.races,
-      racename: this.props.racename,
       users: [],
+      result: [],
     };
   }
 
@@ -23,19 +22,19 @@ export default class Score extends Component {
           this.setState({
             users: response.data.map((user) => user.username),
           });
-
-          console.log(this.state.users);
+          //console.log(this.state.users);
         }
       })
       .catch((error) => {
         console.log(error);
       });
 
-    raceNumber = this.state.races.indexOf(this.state.racename) + 1;
+    race_number = this.props.races.indexOf(this.props.racename) + 1;
     const resultArray = [];
-    console.log(raceNumber);
+    //console.log(race_number + " race number");
+    //console.log(this.props.racename + " race name");
 
-    fetch("http://ergast.com/api/f1/2020/" + raceNumber + "/results")
+    fetch("http://ergast.com/api/f1/2020/" + race_number + "/results")
       .then(function (resp) {
         return resp.text();
       })
@@ -47,7 +46,7 @@ export default class Score extends Component {
             xmlDoc.getElementsByTagName("FamilyName")[i].textContent
           );
         }
-        console.log(resultArray);
+        //console.log(resultArray);
       });
     this.setState((state) => {
       return { result: resultArray };
@@ -62,14 +61,14 @@ export default class Score extends Component {
             return (
               <UserScore
                 username={user}
-                racename={this.state.racename}
+                racename={this.props.racename}
                 result={this.state.result}
               />
             );
           })}
         </div>
         <div>
-          <div>{this.state.racename}</div>
+          <div>{this.props.racename}</div>
         </div>
       </div>
     );

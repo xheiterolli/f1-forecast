@@ -16,7 +16,6 @@ export default class AllScores extends Component {
   }
 
   componentDidMount() {
-    // getting results --------------------------------------------------
     const found_races = [];
 
     fetch("http://ergast.com/api/f1/2020/results?limit=400")
@@ -32,7 +31,7 @@ export default class AllScores extends Component {
             xmlDoc.getElementsByTagName("RaceName")[i].textContent
           );
         }
-        console.log(found_races);
+        //console.log(found_races);
       });
     this.setState((state) => {
       return { races: found_races };
@@ -42,9 +41,11 @@ export default class AllScores extends Component {
   render() {
     return (
       <div>
-        {this.state.races.map((race) => {
-          return <Score raceName={race} races={this.state.races} />;
-        })}
+        <div>
+          {this.state.races.map((race) => {
+            return <Score racename={race} races={this.state.races} />;
+          })}
+        </div>
       </div>
     );
   }

@@ -24,14 +24,13 @@ export default class UserScore extends Component {
           this.setState({
             predictions: response.data,
           });
-          console.log(this.state.predictions.length);
+          //console.log(this.state.predictions.length + " predictions length");
           for (let i = 0; i < this.state.predictions.length; i++) {
-            console.log(this.state.predictions[i].username);
-            console.log(this.props.username);
-            console.log(this.state.predictions[i].race);
-            console.log(this.props.racename);
+            //console.log(this.state.predictions[i].username);
+            //console.log(this.props.username);
+            //console.log(this.state.predictions[i].race);
+            //console.log(this.props.racename);
 
-            /*
             if (
               this.state.predictions[i].username === this.state.user &&
               this.state.predictions[i].race === this.state.racename
@@ -40,12 +39,9 @@ export default class UserScore extends Component {
                 predict: this.state.predictions[i],
               });
 
-              console.log("------------------------------------");
               console.log(this.state.predict.items);
             } else {
-              console.log("else ------------------------------------");
             }
-            */
           }
           //console.log(response.data);
         }
@@ -58,6 +54,12 @@ export default class UserScore extends Component {
   }
 
   render() {
-    return <div>{this.state.user}</div>;
+    return (
+      <div>
+        <div>{this.state.user}</div>
+      </div>
+    );
   }
 }
+
+//<div> {this.state.predict}</div>
