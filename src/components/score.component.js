@@ -11,6 +11,7 @@ export default class Score extends Component {
     this.state = {
       users: [],
       result: [],
+      fast_lap: {},
     };
   }
 
@@ -46,11 +47,29 @@ export default class Score extends Component {
             xmlDoc.getElementsByTagName("FamilyName")[i].textContent
           );
         }
-        //console.log(resultArray);
       });
     this.setState((state) => {
       return { result: resultArray };
     });
+
+    let fast_name;
+
+    fetch("http://ergast.com/api/f1/2020/" + race_number + "/fastest/1/results")
+      .then(function (resp) {
+        return resp.text();
+      })
+      .then(function (data) {
+        let parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(data, "text/xml");
+        for (let i = 0; i < 1; i++) {
+          fast_name = xmlDoc.getElementsByTagName("FamilyName")[i].textContent;
+        }
+        console.log(fast_name);
+      });
+    this.setState((state) => {
+      return { fast_lap: fast_name };
+    });
+    //console.log(this.state.fast_lap + " fastlap");
   }
 
   render() {
@@ -67,10 +86,10 @@ export default class Score extends Component {
             );
           })}
         </div>
-        <div>
-          <div>{this.props.racename}</div>
-        </div>
+        <div></div>
       </div>
     );
   }
 }
+
+//          <div>{this.state.fast_lap}</div>

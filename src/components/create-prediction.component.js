@@ -133,7 +133,7 @@ export default class CreatePrediction extends Component {
             xmlDoc.getElementsByTagName("RaceName")[i].textContent
           );
         }
-        console.log(racesArray);
+        //console.log(racesArray);
       });
 
     this.setState((state) => {
