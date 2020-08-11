@@ -74,22 +74,153 @@ export default class Score extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          {this.state.users.map((user) => {
-            return (
-              <UserScore
-                username={user}
-                racename={this.props.racename}
-                result={this.state.result}
-              />
-            );
-          })}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            width: "50%",
+            height: "10%",
+            backgroundColor: "red",
+            border: "1px solid black",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "2%",
+            margin: "2%",
+          }}
+        >
+          <div style={{ padding: "2%", margin: "2%" }}> Hello </div>
         </div>
-        <div></div>
       </div>
     );
   }
 }
 
 //          <div>{this.state.fast_lap}</div>
+
+/*
+<div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            width: "50%",
+            margin: "1%",
+            padding: "1%",
+            boxShadow: "2px 2px 2px 2px #D3D3D3",
+            fontStyle: "oblique",
+            color: "black",
+            borderRadius: "10px",
+          }}
+        >
+          {this.props.racename}
+          <div
+            style={{
+              width: "80%",
+              float: "right",
+              display: "inline-block",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{
+                margin: "1%",
+                padding: "10px 1%",
+                boxShadow: "3px 3px 3px 3px #9E9E9E",
+                fontStyle: "oblique",
+                color: "black",
+                borderRadius: "10px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {this.state.users.map((user) => {
+                return (
+                  <UserScore
+                    username={user}
+                    racename={this.props.racename}
+                    result={this.state.result}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+*/
+
+/*
+ <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              width: "50%",
+              margin: "1%",
+              padding: "1%",
+              boxShadow: "2px 2px 2px 2px #D3D3D3",
+              fontStyle: "oblique",
+              color: "black",
+              borderRadius: "10px",
+            }}
+          >
+            {this.props.racename}
+          </div>
+        </div>
+        <div
+          style={{
+            width: "80%",
+            float: "right",
+            display: "inline-block",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              margin: "1%",
+              padding: "10px 1%",
+              boxShadow: "3px 3px 3px 3px #9E9E9E",
+              fontStyle: "oblique",
+              color: "black",
+              borderRadius: "10px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {this.state.users.map((user) => {
+              return (
+                <UserScore
+                  username={user}
+                  racename={this.props.racename}
+                  result={this.state.result}
+                />
+              );
+            })}
+          </div>
+        </div>
+      </div>
+*/

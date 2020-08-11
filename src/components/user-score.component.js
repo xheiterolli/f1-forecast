@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import styles from "../index.css";
 
 export default class UserScore extends Component {
   constructor(props) {
@@ -8,7 +9,7 @@ export default class UserScore extends Component {
       user: this.props.username,
       resultArray: this.props.result,
       racename: this.props.racename,
-      resultFast: {},
+      resultFast: [],
       predictArray: [],
       predictFast: {},
       predictions: {},
@@ -48,18 +49,101 @@ export default class UserScore extends Component {
       .catch((error) => {
         console.log(error);
       });
+
+    console.log(this.props.racename);
   }
 
   render() {
     return (
       <div>
         <div>
-          <div>{this.state.user}</div>
+          <div style={{}}>{this.state.user}</div>
         </div>
-        <div>{this.state.predictArray}</div>
       </div>
     );
   }
 }
 
 //<div> {this.state.predict}</div>
+
+/*
+{this.props.racename}
+        <div>{this.state.user}</div>
+        <div>{this.state.predictArray}</div>
+        <div>{this.state.fast_lap}</div>
+
+
+
+        <div id="center" className="container" style={{ display: "table-row" }}>
+          <div style={{ display: "table-cell", padding: "10px" }}>
+            {this.state.user}
+          </div>
+          <div style={{ display: "table-cell", padding: "10px" }}>
+            {"[" + this.state.predictArray + "]"}
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              width: "95%",
+              margin: "1%",
+              padding: "50px 1%",
+              border: "3px solid grey",
+              boxShadow: "3px 3px 3px 3px #9E9E9E",
+              fontStyle: "oblique",
+              color: "black",
+            }}
+          >
+            <div>
+              {this.props.racename} - {this.state.user}
+            </div>
+            <div>{"[" + this.state.predictArray + "]"}</div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        width: "60px",
+              height: "60px",
+              margin: "1%",
+              padding: "10px 1%",
+              boxShadow: "3px 3px 3px 3px #9E9E9E",
+              fontStyle: "oblique",
+              color: "black",
+              borderRadius: "10px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+*/
