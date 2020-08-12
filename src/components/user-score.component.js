@@ -57,7 +57,7 @@ export default class UserScore extends Component {
     return (
       <div>
         <div>
-          <div style={{}}>{this.state.user}</div>
+          <div>{this.state.user}</div>
         </div>
       </div>
     );

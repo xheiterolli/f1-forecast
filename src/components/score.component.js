@@ -74,27 +74,50 @@ export default class Score extends Component {
 
   render() {
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      <div>
         <div
           style={{
+            float: "none",
+            margin: "0 auto",
             width: "50%",
-            height: "10%",
+            height: "30%",
             backgroundColor: "red",
             border: "1px solid black",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "2%",
-            margin: "2%",
+            color: "white",
+            marginTop: "1%",
+            borderTopLeftRadius: "10px",
+            borderTopRightRadius: "10px",
           }}
         >
-          <div style={{ padding: "2%", margin: "2%" }}> Hello </div>
+          <div style={{ margin: "1%", marginLeft: "2%" }}>
+            {this.props.racename}
+          </div>
+        </div>
+        <div
+          style={{
+            float: "none",
+            margin: "0 auto",
+            width: "50%",
+            height: "70%",
+            backgroundColor: "blue",
+            border: "1px solid black",
+            color: "white",
+            marginBottom: "2%",
+            borderBottomLeftRadius: "10px",
+            borderBottomRightRadius: "10px",
+          }}
+        >
+          <div style={{ margin: "4%", marginLeft: "2%" }}>
+            {this.state.users.map((user) => {
+              return (
+                <UserScore
+                  username={user}
+                  racename={this.props.racename}
+                  result={this.state.result}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     );
