@@ -55,9 +55,36 @@ export default class UserScore extends Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div
+        style={{
+          display: "inline-block",
+          paddingRight: "2%",
+          margin: "1%",
+          marginTop: "0%",
+          marginLeft: "0%",
+          backgroundColor: "#cdcdcd",
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: "#cdcdcd",
+            padding: "1%",
+            fontSize: "20px",
+            borderBottom: "1px solid black",
+            textAlign: "center",
+          }}
+        >
           <div>{this.state.user}</div>
+        </div>
+        <div>
+          <div
+            style={{
+              fontSize: "50px",
+              fontWeight: "bold",
+            }}
+          >
+            100
+          </div>
         </div>
       </div>
     );
@@ -65,6 +92,9 @@ export default class UserScore extends Component {
 }
 
 //<div> {this.state.predict}</div>
+
+//#e7b9ff
+//#805acb
 
 /*
 {this.props.racename}

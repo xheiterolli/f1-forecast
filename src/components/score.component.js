@@ -81,15 +81,19 @@ export default class Score extends Component {
             margin: "0 auto",
             width: "50%",
             height: "30%",
-            backgroundColor: "red",
-            border: "1px solid black",
-            color: "white",
+            backgroundColor: "#cdcdcd",
+            borderBottom: "1px solid #cdcdcd",
+            borderTop: "2px solid black",
+            borderLeft: "2px solid black",
+            borderRight: "2px solid black",
+            color: "black",
             marginTop: "1%",
             borderTopLeftRadius: "10px",
             borderTopRightRadius: "10px",
+            boxShadow: "6px 8px 8px 6px #D3D3D3",
           }}
         >
-          <div style={{ margin: "1%", marginLeft: "2%" }}>
+          <div style={{ margin: "1%", marginBottom: "0%", fontSize: "27px" }}>
             {this.props.racename}
           </div>
         </div>
@@ -99,15 +103,19 @@ export default class Score extends Component {
             margin: "0 auto",
             width: "50%",
             height: "70%",
-            backgroundColor: "blue",
-            border: "1px solid black",
-            color: "white",
+            backgroundColor: "#cdcdcd",
+            borderTop: "1px solid #cdcdcd",
+            borderBottom: "2px solid black",
+            borderLeft: "2px solid black",
+            borderRight: "2px solid black",
+            color: "black",
             marginBottom: "2%",
             borderBottomLeftRadius: "10px",
             borderBottomRightRadius: "10px",
+            boxShadow: "6px 8px 8px 6px #D3D3D3",
           }}
         >
-          <div style={{ margin: "4%", marginLeft: "2%" }}>
+          <div style={{ margin: "1%", marginTop: "0%" }}>
             {this.state.users.map((user) => {
               return (
                 <UserScore

@@ -100,7 +100,7 @@ export default class CreatePrediction extends Component {
 
     //getting drivers --------------------------------------------------
     const driversArray = [];
-    fetch("http://ergast.com/api/f1/2020/drivers")
+    fetch("http://ergast.com/api/f1/2020/4/results")
       .then(function (resp) {
         return resp.text();
       })
@@ -635,3 +635,5 @@ export default class CreatePrediction extends Component {
     );
   }
 }
+
+//http://ergast.com/api/f1/2020/drivers
