@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import styles from "../index.css";
 
+const pointsArray = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
+
 export default class UserScore extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +16,7 @@ export default class UserScore extends Component {
       predictFast: {},
       predictions: {},
       predict: {},
+      score: {},
     };
   }
 
@@ -50,7 +53,29 @@ export default class UserScore extends Component {
         console.log(error);
       });
 
-    console.log(this.props.racename);
+    //console.log(this.props.racename);
+
+    console.log(this.state.predictArray);
+    console.log(this.state.resultArray);
+  }
+
+  compareResult() {
+    let score = 0;
+    let points = 0;
+    for (let i = 0; i < 10; i++) {
+      if (this.state.predictArray[i] === this.props.result[i].content) {
+        points = pointsArray[i];
+        score = score + points;
+        //console.log(this.props.username + score + " 1");
+        //console.log(score + " 1");
+      }
+    }
+    //console.log(score + " 2");
+    this.setState({
+      score: score,
+    });
+    //console.log(score + " 3");
+    //console.log(score);
   }
 
   render() {
